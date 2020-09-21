@@ -8,12 +8,15 @@ const _ = require('underscore');
 
 const Usuario = require('../models/usuario');
 
+const { verificaToken } = require('../middlewares/autenticacion');
+const { verificaAdmin_Role } = require('../middlewares/autenticacion');
+
 const app = express();
 
 
 
 // Get recupera usuarios
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
 
     // Parametros
     //
@@ -50,7 +53,7 @@ app.get('/usuario', function(req, res) {
 
 //
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
     let body = req.body;
 
     let usuario = new Usuario({
@@ -82,7 +85,7 @@ app.post('/usuario', function(req, res) {
 
 
 // Actualizacion Usuario
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
 
@@ -144,7 +147,7 @@ app.delete('/usuario/:id', function(req, res) {
 */
 
 // Borrado. Marca usuario con estado = false
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
 

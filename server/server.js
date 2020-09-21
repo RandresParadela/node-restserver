@@ -16,8 +16,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// importamos y usamos rutas de usuario
-app.use(require('./routes/usuario'));
+// // importamos y usamos rutas de usuario
+// app.use(require('./routes/usuario'));
+
+
+// importamos y usamos rutas
+
+app.use(require('./routes/index'));
+
+
 
 // Conexion a MongoDB
 mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true },
