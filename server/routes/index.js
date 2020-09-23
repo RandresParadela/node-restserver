@@ -14,5 +14,10 @@ app.use(require('./producto'));
 // importamos y usamos rutas de login
 app.use(require('./login'));
 
+app.use(require('./uploads'));
+
+app.use(require('./imagenes'));
+
+
 
 module.exports = app;
